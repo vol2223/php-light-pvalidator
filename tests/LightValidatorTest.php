@@ -25,4 +25,14 @@ class LigthValidatorTest extends \PHPUnit_Framework_TestCase
 		$this->assertFalse($lgithValidator->isError());
 		$this->assertTrue(empty($lgithValidator->messages()));
 	}
+
+	public function test_validate_EnumNoCheck()
+	{
+		$lgithValidator = new LightValidator(
+			new EnumValidation()
+		);
+		$lgithValidator->validate('HOGE');
+		$this->assertFalse($lgithValidator->isError());
+		$this->assertTrue(empty($lgithValidator->messages()));
+	}
 }
