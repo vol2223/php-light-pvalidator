@@ -19,7 +19,7 @@ class LightValidator
 	/**
 	 * @var string[]
 	 */
-	private $errorMessage = [];
+	private $messages = [];
 	
 	/**
 	 * @param ...\Vol2223\LightValidator\Validation\ValidationInterface $validations
