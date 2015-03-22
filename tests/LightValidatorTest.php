@@ -23,7 +23,8 @@ class LigthValidatorTest extends \PHPUnit_Framework_TestCase
 		);
 		$lgithValidator->validate('HOGE', ['enum' => ['HOGE']]);
 		$this->assertFalse($lgithValidator->isError());
-		$this->assertTrue(empty($lgithValidator->messages()));
+		$result = $lgithValidator->messages();
+		$this->assertTrue(empty($result));
 	}
 
 	public function test_validate_EnumNoCheck()
@@ -33,6 +34,7 @@ class LigthValidatorTest extends \PHPUnit_Framework_TestCase
 		);
 		$lgithValidator->validate('HOGE');
 		$this->assertFalse($lgithValidator->isError());
-		$this->assertTrue(empty($lgithValidator->messages()));
+		$result = $lgithValidator->messages();
+		$this->assertTrue(empty($result));
 	}
 }
