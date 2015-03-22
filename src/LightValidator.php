@@ -2,14 +2,14 @@
 
 namespace Vol2223\LightValidator;
 
-use Vol2223\LightValidator\Validation\ValidationInterface;
+use Vol2223\LightValidator\Validation\Validation;
 
 class LightValidator
 {
 	/**
-	 * @var \Vol2223\LightValidator\Validation\ValidationInterface
+	 * @var \Vol2223\LightValidator\Validation\Validation[]
 	 */
-	private $validations;
+	private $validations = [];
 
 	/**
 	 * @var bool
@@ -22,11 +22,20 @@ class LightValidator
 	private $messages = [];
 	
 	/**
-	 * @param ...\Vol2223\LightValidator\Validation\ValidationInterface $validations
+	 * @param ...\Vol2223\LightValidator\Validation\Validation $validations
+	 * @throws \Exception
 	 */
 	public function __construct()
 	{
-		$this->validations = func_get_args();
+		foreach (func_get_args() as $arg) {
+			if ('Vol2223\LightValidator\Validation\Validation' !== get_parent_class($arg)) {
+				throw new \Exception(sprintf(
+					'予期せぬValidationクラスが渡されました。className=%s',
+					get_parent_class($arg)
+				));
+			}
+			$this->validations[] = $arg;
+		}
 	}
 
 	/**
